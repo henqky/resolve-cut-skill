@@ -1,0 +1,27 @@
+{
+  "project": "qcut-icloud-demo",
+  "timeline": "main",
+  "fps": 24,
+  "width": 1080,
+  "height": 1920,
+  "output_dir": "/Users/hengky/Movies/qcut-icloud-demo",
+  "output_name": "demo-cut",
+  "render_preset": "H.264 Master",
+  "clips": [
+    {
+      "source": "/Users/hengky/Library/Mobile Documents/com~apple~CloudDocs/Downloads/IMG_6420.mp4",
+      "in": 0.0,
+      "out": 2.5,
+      "marker": "Opening",
+      "marker_color": "Blue"
+    },
+    {
+      "source": "/Users/hengky/Library/Mobile Documents/com~apple~CloudDocs/Downloads/Ads Viral.MOV",
+      "in": 1.0,
+      "out": 3.5,
+      "marker": "Ad beat",
+      "marker_color": "Green",
+      "marker_note": "Hook candidate"
+    }
+  ]
+}
