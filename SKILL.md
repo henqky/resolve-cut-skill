@@ -94,6 +94,8 @@ The result reports `ok`, `job_status`, `timeline_frames`, `markers_added`, and t
   so the script converts seconds with the source FPS. Even so, when a 25 or 30 fps clip sits on a 24 fps
   timeline, Resolve's frame placement shortens the cut by about 0.1 s per clip. For exact durations, set
   `fps` to the source rate, or transcode the sources first.
+- **End frame is exclusive.** `endFrame` in `CreateTimelineFromClips` must be `out × fps`, not `out × fps − 1`.
+  With the inclusive reading, every clip came out one frame short (71 instead of 72 frames for 3 s).
 - **Timeline start is 01:00:00:00.** Resolve's absolute frame numbers start at 86400 at 24 fps. The script
   places markers relative to the timeline start, so you don't need to handle this yourself.
 - **Marker frames are timeline-relative.** They are computed from each item's real start, not from the plan math.

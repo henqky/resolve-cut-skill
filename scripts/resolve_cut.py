@@ -128,7 +128,8 @@ def build_and_render(resolve, plan, dry_run=False):
         segments.append({
             "mediaPoolItem": media[clip["source"]],
             "startFrame": int(round(clip["in"] * src_fps)),
-            "endFrame": int(round(clip["out"] * src_fps)) - 1,  # Resolve end frame is inclusive
+            # endFrame is EXCLUSIVE in CreateTimelineFromClips (verified: end-1 gave 1 frame short per clip)
+            "endFrame": int(round(clip["out"] * src_fps)),
         })
     timeline = media_pool.CreateTimelineFromClips(plan["timeline"], segments)
     if not timeline:
