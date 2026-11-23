@@ -51,7 +51,7 @@ python3 scripts/resolve_cut.py plan.json       # Resolve must be running
 ## Known limits
 
 - A 24 fps timeline with 25 or 30 fps sources shortens cuts by about 0.1 s per clip. Match `fps` to the source.
-- One video track, no titles, captions, transitions, or audio mix yet.
+- One video track in Resolve; no titles, captions, or transitions yet. Audio mixing runs afterwards via `scripts/master_audio.py`.
 
 ## License
 
