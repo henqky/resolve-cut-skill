@@ -103,8 +103,37 @@ The result reports `ok`, `job_status`, `timeline_frames`, `markers_added`, and t
 - **Rendering is blocking.** The script waits up to `render_timeout_sec` (default 900 s).
 - **No deletion.** The script never deletes media, projects, or timelines.
 
+## Reels craft and sound (read before cutting a reel)
+
+- **Style first.** Pick one style from [references/editing-styles.md](references/editing-styles.md)
+  (talking head, vlog, cinematic, documentary, meme, beat-synced). It sets cut rate and sound.
+- **Structure.** Hook in the first 1–3 s, cut dead air, cut on motion, captions last.
+  See [references/reels-editing.md](references/reels-editing.md), including J/L-cuts and safe zones.
+- **Safe zones (1080×1920).** Keep titles clear of the top ~270 px, captions above the bottom ~670 px,
+  and the right ~120 px rail clear. These are Meta ad-guidance defaults; preview on a phone.
+- **Sound.** Dialogue first, duck music under narration, then master the whole mix to −14 LUFS with a
+  −1 dBTP ceiling. See [references/sound-engineering.md](references/sound-engineering.md).
+
+### Audio mastering step
+
+After the Resolve render, mix narration and music and master the result (ffmpeg, no Resolve needed):
+
+```bash
+python3 scripts/master_audio.py --video render.mov --out final.mp4 \
+  --narration vo.wav --narration-delay 0.4 --music bed.mp3 --music-gain-db -14
+```
+
+- Music is sidechain-ducked under the narration. Verified: the bed drops about 8 dB under speech and
+  recovers after it.
+- Loudness is two-pass `loudnorm` to −14 LUFS / −1 dBTP, followed by a true-peak limiter.
+  On a peaky narrated mix, the result landed at −14.8 LUFS with a −1.2 dBFS peak. The limiter keeps
+  the peak ceiling, so the integrated figure can sit about 0.8 LU under −14 on peaky material.
+- Resolve's Fairlight or Deliver "Normalize to Standard" is an alternative. The skill uses ffmpeg so the
+  step is scriptable and repeatable.
+
 ## Out of scope for this version
 
-- Titles, captions, transitions, color grading, audio mix. Add them in Resolve, or extend `build_and_render`.
+- Titles, captions, transitions, and color grading. Add them in Resolve, or extend `build_and_render`.
+- Multi-track audio inside Resolve. Narration and music are mixed afterwards with `master_audio.py`.
 - Pulling from the Photos library directly (see the reference doc for the export route).
 - Multi-track edits. The plan builds one video track, in order.

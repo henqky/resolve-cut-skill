@@ -42,6 +42,11 @@ python3 scripts/resolve_cut.py plan.json       # Resolve must be running
 | `examples/cut-plan.example.json` | Two-clip example plan |
 | `references/icloud-sources.md` | iCloud Drive vs Photos access |
 | `references/resolve-api-notes.md` | Verified Resolve API calls and limits |
+| `references/reels-editing.md` | Reels structure, cut technique, captions, safe zones |
+| `references/sound-engineering.md` | Loudness targets, ducking, mix order, Resolve audio |
+| `references/editing-styles.md` | Talking head, vlog, cinematic, documentary, meme, beat-synced |
+| `scripts/master_audio.py` | Narration/music mix with ducking and −14 LUFS mastering (ffmpeg) |
+| `tools/apple-analyze/` | On-device Apple Vision/SoundAnalysis shot analysis (Swift) |
 
 ## Known limits
 
